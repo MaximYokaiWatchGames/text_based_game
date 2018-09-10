@@ -22,7 +22,6 @@ char *choices[] = {
 };
 
 void func(char *name);
-void choice1(char *name);
 
 int main()
 { 
@@ -45,15 +44,11 @@ int main()
   /* Initialize items */
   n_choices = ARRAY_SIZE(choices);
   my_items = (ITEM **)calloc(n_choices + 1, sizeof(ITEM *));
-
-  my_items[0] = new_item(choices[0], choices[0]);
-  set_item_userptr(my_items[0], (void *) choice1);
-
-  for(i = 1; i < n_choices; ++i)
+  for(i = 0; i < n_choices; ++i)
   {       
     my_items[i] = new_item(choices[i], choices[i]);
     /* Set the user pointer */
-    set_item_userptr(my_items[i], (void *) func);
+    set_item_userptr(my_items[i], func);
   }
   my_items[n_choices] = (ITEM *)NULL;
 
@@ -66,7 +61,7 @@ int main()
   post_menu(my_menu);
   refresh();
 
-  while((c = getch()) != 113 /* q */) //press 'q' to quit
+  while((c = getch()) != 113 /*q*/)
   {
     switch(c)
     { 
@@ -82,7 +77,7 @@ int main()
         void (*p)(char *);
 
         cur = current_item(my_menu);
-        p = (void (*)(char *))item_userptr(cur);
+        p = item_userptr(cur);
         p((char *)item_name(cur));
         pos_menu_cursor(my_menu);
         break;
@@ -103,11 +98,3 @@ void func(char *name)
   clrtoeol();
   mvprintw(20, 0, "Item selected is : %s", name);
 }
-
-void choice1(char *name)
-{
-  move(20, 0);
-  clrtoeol();
-  mvprintw(20, 0, "Item selected is : %s....SUCK IT", name);
-}
-
