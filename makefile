@@ -1,2 +1,2 @@
 all:
-	g++ -g -Wall -lncurses *.cpp -o run
+	g++ -g -Wall -o run main.cpp -lncurses
