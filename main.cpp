@@ -34,6 +34,15 @@ int main()
 
   /* Initialize curses */ 
   initscr();
+  if(!has_colors())
+  {
+    printw("Terminal has no colors!");
+    printf("\nTerminal has no colors!\n");
+    refresh();
+    endwin();
+    return -1;
+  }
+    
   start_color();
   cbreak();
   noecho();
@@ -62,7 +71,7 @@ int main()
 
   /* Post the menu */
   mvprintw(LINES - 3, 0, "Press <ENTER> to see the option selected");
-  mvprintw(LINES - 2, 0, "Up and Down arrow keys to naviage (F1 to Exit)");
+  mvprintw(LINES - 2, 0, "Up and Down arrow keys to naviage ('q' to Exit)");
   post_menu(my_menu);
   refresh();
 
@@ -83,7 +92,9 @@ int main()
 
         cur = current_item(my_menu);
         p = (void (*)(char *))item_userptr(cur);
+        wattron(stdscr, COLOR_PAIR(1));
         p((char *)item_name(cur));
+        wattroff(stdscr, COLOR_PAIR(1));
         pos_menu_cursor(my_menu);
         break;
       }
