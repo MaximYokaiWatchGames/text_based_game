@@ -1,0 +1,10 @@
+Reading symbols from ./run...done.
+Temporary breakpoint 1 at 0x1386: file main.cpp, line 6.
+Starting program: /u/mrh8/text_based_game/run 
+
+Temporary breakpoint 1, main () at main.cpp:6
+6	{
+Reading symbols from ./run...done.
+Reading symbols from ./run...done.
+Reading symbols from ./run...done.
+Reading symbols from ./run...done.
